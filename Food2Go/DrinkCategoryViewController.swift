@@ -1,13 +1,13 @@
 //
-//  VegetableCategoryViewController.swift
+//  DrinkCategoryViewController.swift
 //  Food2Go
 //
-//  Created by Makendra Phipps on 3/21/26.
+//  Created by Makendra Phipps on 3/24/26.
 //
 
 import UIKit
 
-class VegetableCategoryViewController: UIViewController {
+class DrinkCategoryViewController: UIViewController {
 
     var updateCart: [(name: String, quantity: Int, price: Double)] = []
     
