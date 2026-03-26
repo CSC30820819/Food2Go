@@ -151,6 +151,9 @@
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <segue destination="yps-gy-H5Z" kind="presentation" identifier="MeatProduct" modalPresentationStyle="fullScreen" id="I3r-Gs-WIo"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="63B-bp-sWf" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -173,6 +176,9 @@
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <segue destination="yps-gy-H5Z" kind="presentation" identifier="FruitProduct" modalPresentationStyle="fullScreen" id="lZ7-JF-s0E"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="mj4-3h-dOT" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -195,6 +201,9 @@
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <segue destination="yps-gy-H5Z" kind="presentation" identifier="VegetableProduct" modalPresentationStyle="fullScreen" id="KZy-2q-2Br"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="GF6-6l-wZ2" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -210,10 +219,11 @@
                         <viewLayoutGuide key="safeArea" id="qC4-aG-V2H"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
+                    <navigationItem key="navigationItem" id="TPt-Rz-meH"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="TqJ-2t-8bp" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1065" y="1622"/>
+            <point key="canvasLocation" x="2918.320610687023" y="1621.8309859154931"/>
         </scene>
         <!--Grains-->
         <scene sceneID="dMN-Io-6dm">
@@ -232,6 +242,9 @@
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <segue destination="yps-gy-H5Z" kind="presentation" identifier="GrainProduct" modalPresentationStyle="fullScreen" id="SwA-nh-i12"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ToP-9Z-vFf" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -254,6 +267,9 @@
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <segue destination="yps-gy-H5Z" kind="presentation" identifier="DairyProduct" modalPresentationStyle="fullScreen" id="y3Y-gH-3FB"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="FYd-zF-yGi" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -276,6 +292,9 @@
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <segue destination="yps-gy-H5Z" kind="presentation" identifier="DrinkProduct" modalPresentationStyle="fullScreen" id="MVq-VF-XGM"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="r4N-1Z-KrX" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -434,13 +453,34 @@
             </objects>
             <point key="canvasLocation" x="7341.221374045801" y="852.8169014084508"/>
         </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="Xdl-1p-Got">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="yps-gy-H5Z" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="sx9-op-kcI">
+                        <rect key="frame" x="0.0" y="59" width="393" height="54"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="WPc-qj-3EE" kind="relationship" relationship="rootViewController" id="yEh-Dl-gsX"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ysk-qM-jfU" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1991.6030534351144" y="1621.8309859154931"/>
+        </scene>
     </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="y3Y-gH-3FB"/>
+    </inferredMetricsTieBreakers>
     <resources>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
         <systemColor name="systemGray5Color">
-            <color red="0.8980392157" green="0.8980392157" blue="0.91764705879999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.89803921568627454" green="0.89803921568627454" blue="0.91764705882352937" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>
