@@ -9,41 +9,37 @@ import UIKit
 
 class ViewController: UIViewController {
 
+    var categoryToSend: String = ""
+    var colorToSend: UIColor?
     
-   //Include a prepare function to pass the cart variable to update it (Product View) or to view it (Cart View)
-    var cart: [(name: String, quantity: Int, price: Double)] = []
-    
+    @IBAction func categoryTapped(_ sender: UIButton) {
+        let title = sender.configuration?.title ?? sender.currentTitle ?? ""
+            
+        categoryToSend = title
+        colorToSend = sender.configuration?.baseBackgroundColor ?? sender.backgroundColor
+        
+        
+            print("Button Pressed! Title found: \(categoryToSend)")
+            
+            if !categoryToSend.isEmpty {
+                performSegue(withIdentifier: "goToCategory", sender: self)
+            }
+        }
+
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if let dest = segue.destination as? FruitCategoryViewController{
-            dest.updateCart = cart
+            if segue.identifier == "goToCategory" {
+                if let navVC = segue.destination as? UINavigationController,
+                   let destinationVC = navVC.viewControllers.first as? CategoryViewController {
+                    
+                    destinationVC.receivedCategory = categoryToSend
+                    destinationVC.receivedColor = colorToSend
+                }
+                
+                else if let destinationVC = segue.destination as? CategoryViewController {
+                    destinationVC.receivedCategory = categoryToSend
+                    destinationVC.receivedColor = colorToSend
+                }
+            }
         }
-        if let dest = segue.destination as? VegetableCategoryViewController{
-            dest.updateCart = cart
-        }
-        if let dest = segue.destination as? GrainCategoryViewController{
-            dest.updateCart = cart
-        }
-        if let dest = segue.destination as? MeatCategoryViewController{
-            dest.updateCart = cart
-        }
-        if let dest = segue.destination as? DairyCategoryViewController{
-            dest.updateCart = cart
-        }
-        if let dest = segue.destination as? DrinkCategoryViewController{
-            dest.updateCart = cart
-        }
-    }
-    
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        // Do any additional setup after loading the view.
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        //update cart
-    }
-
-
 }
 
