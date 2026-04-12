@@ -45,11 +45,9 @@ class CategoryViewController: UIViewController, UITextFieldDelegate {
         }
     }
     
-    
     @IBAction func stepperChanged(_ sender: UIStepper) {
         let index = sender.tag
         let newValue = Int(sender.value)
-        
         quantityTextFields[index].text = "\(newValue)"
     }
     
@@ -83,4 +81,38 @@ class CategoryViewController: UIViewController, UITextFieldDelegate {
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         view.endEditing(true)
     }
+    
+    //add to cart func
+    @IBAction func addToCartPressed(_ sender: UIButton) {
+        guard let category = receivedCategory,
+        let items = groceryData[category] else { return }
+        //for each textField in category (9)
+        for textField in quantityTextFields {
+            //get current tag and quantity
+            let index = textField.tag
+            let quantity = Int(textField.text ?? "0") ?? 0
+            //if user selected this item (quantity > 0) otherwise move to next item
+            if quantity <= 0 { continue }
+            //get name of item
+            let name = itemNameLabels.first(where: { $0.tag == index})?.text ?? ""
+            //find correct item
+            guard let groceryItem = items.first(where: { $0.name == name}) else { continue }
+            //if current item currently exists in cart add to quantity
+            if let existingIndex = Cart.items.firstIndex(where: { $0.item.name == groceryItem.name }) {
+                Cart.items[existingIndex].quantity += quantity
+            //otherwise add item to cart
+            }else {
+                Cart.items.append(CartItem(item: groceryItem, quantity: quantity))
+            }
+        }
+        //debug
+        print("Cart Items:")
+        for item in Cart.items {
+            print("\(item.item.name) - Qty: \(item.quantity)")
+        }
+        for i in 0..<items.count {
+            print("Index \(i): \(items[i].name)")
+        }
+    }
 }
+

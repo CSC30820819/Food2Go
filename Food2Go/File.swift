@@ -12,6 +12,17 @@ struct GroceryItem {
     let price: Double
 }
 
+//Cart Item Struct
+struct CartItem {
+    let item: GroceryItem
+    var quantity: Int
+}
+
+//Cart Class
+class Cart {
+    static var items: [CartItem] = []
+}
+
 let groceryData: [String: [GroceryItem]] = [
     "Dairy": [
         GroceryItem(name: "Milk", price: 3.50), GroceryItem(name: "Cheese", price: 4.99),
@@ -56,3 +67,4 @@ let groceryData: [String: [GroceryItem]] = [
         GroceryItem(name: "Lemonade", price: 2.50)
     ]
 ]
+

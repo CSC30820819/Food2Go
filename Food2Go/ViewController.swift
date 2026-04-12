@@ -41,5 +41,9 @@ class ViewController: UIViewController {
                 }
             }
         }
+    
+    @IBAction func viewCartTapped(_ sender: UIButton) {
+        print("goToCart")
+    }
 }
 

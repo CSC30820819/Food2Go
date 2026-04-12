@@ -7,23 +7,27 @@
 
 import UIKit
 
-class CartViewController: UIViewController {
-
+class CartViewController: UITableViewController{
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return Cart.items.count
     }
-    */
-
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        //make cell with custom cart cell class
+        let cell = tableView.dequeueReusableCell(withIdentifier: "CartCell", for: indexPath) as! CartCell
+        //select cart item
+        let cartItem = Cart.items[indexPath.row]
+        //change cell values to match cart item
+        cell.nameLabel.text = cartItem.item.name
+        cell.priceLabel.text = String(format: "$%.2f", cartItem.item.price)
+        cell.quantityLabel.text = "\(cartItem.quantity)"
+        let total = cartItem.item.price * Double(cartItem.quantity)
+        cell.totalPriceLabel.text = String(format: "$%.2f", total)
+        //display cell
+        return cell
+    }
 }
