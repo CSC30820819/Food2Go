@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="23727" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="M46-G5-b6O">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="24506" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="M46-G5-b6O">
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="23721"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="24504"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -17,7 +17,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hWH-Zt-Vof">
-                                <rect key="frame" x="124" y="527" width="145" height="62"/>
+                                <rect key="frame" x="124" y="537" width="145" height="62"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="filled" title="Grains">
                                     <fontDescription key="titleFontDescription" type="boldSystem" pointSize="40"/>
@@ -29,7 +29,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="07Y-37-1cq">
-                                <rect key="frame" x="135" y="615" width="123" height="62"/>
+                                <rect key="frame" x="135" y="625" width="123" height="62"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="filled" title="Dairy">
                                     <fontDescription key="titleFontDescription" type="boldSystem" pointSize="40"/>
@@ -41,7 +41,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MNl-GO-InH">
-                                <rect key="frame" x="124" y="703" width="145" height="62"/>
+                                <rect key="frame" x="124" y="713" width="145" height="62"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="filled" title="Drinks">
                                     <fontDescription key="titleFontDescription" type="boldSystem" pointSize="40"/>
@@ -53,7 +53,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DdU-RA-6Pu">
-                                <rect key="frame" x="80" y="351" width="233" height="62"/>
+                                <rect key="frame" x="80" y="361" width="233" height="62"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="filled" title="Vegetables">
                                     <fontDescription key="titleFontDescription" type="boldSystem" pointSize="40"/>
@@ -65,7 +65,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="v2F-34-iqb">
-                                <rect key="frame" x="137" y="439" width="119" height="62"/>
+                                <rect key="frame" x="137" y="449" width="119" height="62"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="filled" title="Meat">
                                     <fontDescription key="titleFontDescription" type="boldSystem" pointSize="40"/>
@@ -77,7 +77,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rOY-3w-uH2">
-                                <rect key="frame" x="131" y="263" width="131" height="62"/>
+                                <rect key="frame" x="131" y="273" width="131" height="62"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="filled" title="Fruits">
                                     <fontDescription key="titleFontDescription" type="boldSystem" pointSize="40"/>
@@ -116,8 +116,8 @@
                     <navigationItem key="navigationItem" title="Food2Go" id="OdF-rh-yO7">
                         <barButtonItem key="backBarButtonItem" title="Back" id="TMU-7b-uWu"/>
                         <barButtonItem key="rightBarButtonItem" style="plain" id="jbD-T5-Jdq">
-                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" id="q1e-Qg-Sut">
-                                <rect key="frame" x="227" y="0.0" width="150" height="44"/>
+                            <button key="customView" opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" id="q1e-Qg-Sut">
+                                <rect key="frame" x="223" y="4.0000000000000009" width="150" height="36"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="filled" title="View Cart">
@@ -499,7 +499,7 @@
                                             </stackView>
                                         </subviews>
                                     </stackView>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TYI-AK-Myb">
+                                    <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TYI-AK-Myb">
                                         <rect key="frame" x="79.333333333333329" y="566" width="200.33333333333337" height="57"/>
                                         <state key="normal" title="Button"/>
                                         <buttonConfiguration key="configuration" style="filled" title="Add to Cart">
@@ -524,6 +524,7 @@
                         <barButtonItem key="backBarButtonItem" title="Back" id="zfD-AO-WM3"/>
                     </navigationItem>
                     <connections>
+                        <outlet property="addToCart" destination="TYI-AK-Myb" id="c9Z-gA-8Ow"/>
                         <outlet property="titleLabel" destination="JMC-RA-EYf" id="BPa-k6-eku"/>
                         <outletCollection property="priceLabels" destination="g6O-ib-fAO" collectionClass="NSMutableArray" id="vHa-ac-6rg"/>
                         <outletCollection property="priceLabels" destination="H3c-OF-qxN" collectionClass="NSMutableArray" id="Dea-pz-SKb"/>
@@ -577,10 +578,10 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="CartCell" id="hCT-TF-LUE" customClass="CartCell" customModule="Food2Go">
-                                <rect key="frame" x="0.0" y="50" width="393" height="43.666667938232422"/>
+                                <rect key="frame" x="0.0" y="50" width="393" height="51"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="hCT-TF-LUE" id="INc-oQ-w9M">
-                                    <rect key="frame" x="0.0" y="0.0" width="393" height="43.666667938232422"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="393" height="51"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <stackView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" distribution="fillEqually" alignment="top" translatesAutoresizingMaskIntoConstraints="NO" id="GYk-gk-eeJ">
@@ -639,7 +640,7 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="M46-G5-b6O" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" largeTitles="YES" id="DWW-jh-sDr">
-                        <rect key="frame" x="0.0" y="117.99999999999999" width="393" height="105.66666666666664"/>
+                        <rect key="frame" x="0.0" y="117.99999999999999" width="393" height="115.66666666666664"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <textAttributes key="titleTextAttributes">
                             <fontDescription key="fontDescription" name="MarkerFelt-Thin" family="Marker Felt" pointSize="24"/>

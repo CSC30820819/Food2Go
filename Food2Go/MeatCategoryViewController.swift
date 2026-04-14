@@ -16,6 +16,7 @@ class CategoryViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet var steppers: [UIStepper]!
     
     
+    @IBOutlet weak var addToCart: UIButton!
     var receivedCategory: String?
     var receivedColor: UIColor?
     
@@ -49,6 +50,21 @@ class CategoryViewController: UIViewController, UITextFieldDelegate {
         let index = sender.tag
         let newValue = Int(sender.value)
         quantityTextFields[index].text = "\(newValue)"
+        
+        addToCartEnable()
+    }
+    
+    
+    func addToCartEnable(){
+        var enable = false
+        for i in quantityTextFields{
+            if let amount = Int(i.text ?? "0"), amount > 0{
+                enable = true
+                break
+            }
+        }
+        
+        addToCart.isEnabled = enable
     }
     
     func textFieldDidEndEditing(_ textField: UITextField) {
