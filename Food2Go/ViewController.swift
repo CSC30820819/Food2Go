@@ -41,9 +41,10 @@ class ViewController: UIViewController {
                 }
             }
         }
-    
+    //debug
     @IBAction func viewCartTapped(_ sender: UIButton) {
         print("goToCart")
+        performSegue(withIdentifier: "goToCart", sender: self)
     }
 }
 
