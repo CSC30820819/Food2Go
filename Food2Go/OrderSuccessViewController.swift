@@ -8,22 +8,12 @@
 import UIKit
 
 class OrderSuccessViewController: UIViewController {
-
+    
+    @IBOutlet weak var totalLabel: UILabel!
+    var totalAmount: Double = 0.0
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        totalLabel.text = "Your total was: \(String(format: "$%.2f", totalAmount))"
     }
-    
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }

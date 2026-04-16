@@ -126,9 +126,18 @@ class CategoryViewController: UIViewController, UITextFieldDelegate {
         for item in Cart.items {
             print("\(item.item.name) - Qty: \(item.quantity)")
         }
-        for i in 0..<items.count {
-            print("Index \(i): \(items[i].name)")
+        //added to cart alert confirmation
+        let alert = UIAlertController(title: "Added to Cart!", message: "", preferredStyle: .alert)
+        let okAction = UIAlertAction(title: "OK", style: .default) { (_) in
+            //reset quantities
+            for i in 0..<self.quantityTextFields.count {
+                self.quantityTextFields[i].text = "0"
+                self.steppers[i].value = 0
+            }
         }
+        alert.addAction(okAction)
+        present(alert, animated: true)
+        addToCart.isEnabled = false
     }
 }
 
