@@ -34,7 +34,7 @@ class CartViewController: UIViewController, UITableViewDataSource, UITableViewDe
     //clear cart when leaving view
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
-        Cart.items.removeAll()
+        //Cart.items.removeAll()
         tableView.reloadData()
         updateCheckoutButton()
     }
