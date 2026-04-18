@@ -104,6 +104,9 @@ class CartViewController: UIViewController, UITableViewDataSource, UITableViewDe
         let alert = UIAlertController(title: "Checkout", message: "Are you sure you want to checkout?", preferredStyle: .alert)
         let yesAction = UIAlertAction(title: "Yes", style: .default) { (_) in
             self.performSegue(withIdentifier: "goToCheckout", sender: self)
+            Cart.items.removeAll()
+            self.tableView.reloadData()
+            self.updateCheckoutButton()
             print("checked out")
         }
         let noAction = UIAlertAction(title: "No", style: .default) { (_) in
