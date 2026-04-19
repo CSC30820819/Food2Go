@@ -7,13 +7,17 @@
 
 import UIKit
 
-class CartViewController: UIViewController, UITableViewDataSource, UITableViewDelegate{
+class CartViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
     @IBOutlet weak var checkoutButton: UIButton!
     @IBOutlet var tableView: UITableView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        let backButton = UIBarButtonItem()
+        backButton.title = "Home"
+        navigationItem.backBarButtonItem = backButton
         
         tableView.dataSource = self
         tableView.delegate = self
@@ -31,6 +35,7 @@ class CartViewController: UIViewController, UITableViewDataSource, UITableViewDe
             destiationVC.totalAmount = calculateTotal()
         }
     }
+    
     //clear cart when leaving view
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
@@ -38,18 +43,69 @@ class CartViewController: UIViewController, UITableViewDataSource, UITableViewDe
         tableView.reloadData()
         updateCheckoutButton()
     }
+
+    
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let headerView = UIView()
+        headerView.backgroundColor = UIColor.systemBackground.withAlphaComponent(0.8)
+        
+        let productH = UILabel()
+        let priceH = UILabel()
+        let qtyH = UILabel()
+        let totalH = UILabel()
+        let spacerH = UIView()
+        
+        productH.text = "PRODUCT"
+        priceH.text = "PRICE"
+        qtyH.text = "QTY"
+        totalH.text = "TOTAL"
+        
+        [productH, priceH, qtyH, totalH].forEach {
+            $0.font = .systemFont(ofSize: 10, weight: .bold)
+            $0.textColor = .secondaryLabel
+        }
+        
+        let stack = UIStackView(arrangedSubviews: [productH, priceH, qtyH, totalH, spacerH])
+        stack.axis = .horizontal
+        stack.spacing = 8
+        stack.alignment = .center
+        stack.translatesAutoresizingMaskIntoConstraints = false
+        
+        
+        priceH.widthAnchor.constraint(equalToConstant: 50).isActive = true
+        qtyH.widthAnchor.constraint(equalToConstant: 30).isActive = true
+        totalH.widthAnchor.constraint(equalToConstant: 60).isActive = true
+        spacerH.widthAnchor.constraint(equalToConstant: 40).isActive = true
+        
+        headerView.addSubview(stack)
+        
+        NSLayoutConstraint.activate([
+            stack.leadingAnchor.constraint(equalTo: headerView.leadingAnchor, constant: 16),
+            stack.trailingAnchor.constraint(equalTo: headerView.trailingAnchor, constant: -16),
+            stack.topAnchor.constraint(equalTo: headerView.topAnchor),
+            stack.bottomAnchor.constraint(equalTo: headerView.bottomAnchor)
+        ])
+        
+        return headerView
+    }
+
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 30
+    }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return Cart.items.count + 1
     }
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         //footer (total price)
         if indexPath.row == Cart.items.count {
             let cell = UITableViewCell()
             //calculate total
             let total = calculateTotal()
-            cell.textLabel?.text = "Total: \(String(format: "$%.2f", total))"
+            cell.textLabel?.text = "Total (+ tax): \(String(format: "$%.2f", total))"
             cell.textLabel?.font = UIFont.boldSystemFont(ofSize: 18)
+            cell.textLabel?.textAlignment = .right
             return cell
         }
         //main table (cart)
@@ -66,9 +122,12 @@ class CartViewController: UIViewController, UITableViewDataSource, UITableViewDe
             cell.totalPriceLabel.text = String(format: "$%.2f", total)
             //tag for each button in each row
             cell.minusButton.tag = indexPath.row
+            
+            cell.selectionStyle = .none
             return cell
         }
     }
+    
     func calculateTotal() -> Double {
         var total: Double = 0
         for item in Cart.items {
@@ -77,6 +136,7 @@ class CartViewController: UIViewController, UITableViewDataSource, UITableViewDe
         //total with tax
         return total + (total * 0.06)
     }
+    
     //remove ONE qty of an item inside cart
     @IBAction func minusOne(_ sender: UIButton) {
         let index = sender.tag

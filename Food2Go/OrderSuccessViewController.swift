@@ -14,6 +14,19 @@ class OrderSuccessViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        if var viewControllers = navigationController?.viewControllers {
+            viewControllers.removeAll { $0 is CartViewController }
+            navigationController?.viewControllers = viewControllers
+        }
         totalLabel.text = "Your total was: \(String(format: "$%.2f", totalAmount))"
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        
+        if isMovingFromParent {
+            navigationController?.popToRootViewController(animated: true)
+        }
     }
 }

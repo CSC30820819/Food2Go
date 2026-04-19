@@ -7,137 +7,148 @@
 
 import UIKit
 
-class CategoryViewController: UIViewController, UITextFieldDelegate {
+class CategoryViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
     @IBOutlet weak var titleLabel: UILabel!
-    @IBOutlet var itemNameLabels: [UILabel]!
-    @IBOutlet var priceLabels: [UILabel]!
-    @IBOutlet var quantityTextFields: [UITextField]!
-    @IBOutlet var steppers: [UIStepper]!
-    
-    
+    @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var addToCart: UIButton!
+    
     var receivedCategory: String?
     var receivedColor: UIColor?
-    
+    var itemsToShow: [GroceryItem] = []
+    var currentSelections: [String: Int] = [:]
+
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        tableView.dataSource = self
+        tableView.delegate = self
+        tableView.register(CategoryItemCell.self, forCellReuseIdentifier: "CategoryItemCell")
         
         if let bgColor = receivedColor {
             self.view.backgroundColor = bgColor
         }
         
-        for textField in quantityTextFields {
-            textField.delegate = self
+        if let category = receivedCategory {
+            titleLabel.text = category
+            itemsToShow = groceryData[category] ?? []
         }
         
-        self.navigationItem.title = ""
-        self.navigationItem.largeTitleDisplayMode = .never
+        updateAddToCartButton()
+    }
+
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         
         let appearance = UINavigationBarAppearance()
         appearance.configureWithTransparentBackground()
         appearance.titleTextAttributes = [.foregroundColor: UIColor.clear]
+        appearance.largeTitleTextAttributes = [.foregroundColor: UIColor.clear]
         
         navigationController?.navigationBar.standardAppearance = appearance
         navigationController?.navigationBar.scrollEdgeAppearance = appearance
-        if let category = receivedCategory {
-            titleLabel.text = category
-            populateUI(for: category)
-        }
-    }
-    
-    @IBAction func stepperChanged(_ sender: UIStepper) {
-        let index = sender.tag
-        let newValue = Int(sender.value)
-        quantityTextFields[index].text = "\(newValue)"
+        navigationController?.navigationBar.compactAppearance = appearance
         
-        addToCartEnable()
+        self.navigationItem.title = ""
     }
-    
-    
-    func addToCartEnable(){
-        var enable = false
-        for i in quantityTextFields{
-            if let amount = Int(i.text ?? "0"), amount > 0{
-                enable = true
-                break
-            }
+
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let headerView = UIView()
+        headerView.backgroundColor = UIColor.systemBackground.withAlphaComponent(0.8)
+        
+        let nameH = UILabel()
+        let priceH = UILabel()
+        let qtyH = UILabel()
+        let spacerH = UIView()
+        
+        nameH.text = "ITEM"
+        priceH.text = "PRICE"
+        qtyH.text = "QTY"
+        
+        [nameH, priceH, qtyH].forEach {
+            $0.font = .systemFont(ofSize: 12, weight: .bold)
+            $0.textColor = .secondaryLabel
         }
         
-        addToCart.isEnabled = enable
-    }
-    
-    func textFieldDidEndEditing(_ textField: UITextField) {
-        let index = textField.tag
+        let stack = UIStackView(arrangedSubviews: [nameH, priceH, qtyH, spacerH])
+        stack.axis = .horizontal
+        stack.spacing = 12
+        stack.alignment = .center
+        stack.translatesAutoresizingMaskIntoConstraints = false
         
-        if let text = textField.text, let customValue = Double(text) {
-            let clampedValue = max(0, min(20, customValue))
-            
-            
-            steppers[index].value = clampedValue
-            textField.text = "\(Int(clampedValue))"
-        } else {
-            
-            textField.text = "0"
-            steppers[index].value = 0
-        }
-    }
-    func populateUI(for category: String) {
-        guard let items = groceryData[category] else { return }
+        priceH.widthAnchor.constraint(equalToConstant: 60).isActive = true
+        qtyH.widthAnchor.constraint(equalToConstant: 40).isActive = true
+        spacerH.widthAnchor.constraint(equalToConstant: 94).isActive = true
         
-        for i in 0..<itemNameLabels.count {
-            if i < items.count {
-                let currentItem = items[i]
-                itemNameLabels[i].text = currentItem.name
-                priceLabels[i].text = String(format: "$%.2f", currentItem.price)
-            }
+        headerView.addSubview(stack)
+        
+        NSLayoutConstraint.activate([
+            stack.leadingAnchor.constraint(equalTo: headerView.leadingAnchor, constant: 16),
+            stack.trailingAnchor.constraint(equalTo: headerView.trailingAnchor, constant: -16),
+            stack.topAnchor.constraint(equalTo: headerView.topAnchor),
+            stack.bottomAnchor.constraint(equalTo: headerView.bottomAnchor)
+        ])
+        
+        return headerView
+    }
+    
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 40
+    }
+
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return itemsToShow.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "CategoryItemCell", for: indexPath) as! CategoryItemCell
+        
+        let item = itemsToShow[indexPath.row]
+        cell.nameLabel.text = item.name
+        cell.priceLabel.text = String(format: "$%.2f", item.price)
+        
+        let qty = currentSelections[item.name] ?? 0
+        cell.quantityTextField.text = "\(qty)"
+        cell.stepper.value = Double(qty)
+        
+        cell.quantityChanged = { [weak self] newQty in
+            self?.currentSelections[item.name] = newQty
+            self?.updateAddToCartButton()
         }
+        
+        cell.selectionStyle = .none
+        return cell
     }
-    
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        view.endEditing(true)
+
+    func updateAddToCartButton() {
+        let total = currentSelections.values.reduce(0, +)
+        addToCart.isEnabled = total > 0
     }
-    
-    //add to cart func
+
     @IBAction func addToCartPressed(_ sender: UIButton) {
-        guard let category = receivedCategory,
-        let items = groceryData[category] else { return }
-        //for each textField in category (9)
-        for textField in quantityTextFields {
-            //get current tag and quantity
-            let index = textField.tag
-            let quantity = Int(textField.text ?? "0") ?? 0
-            //if user selected this item (quantity > 0) otherwise move to next item
-            if quantity <= 0 { continue }
-            //get name of item
-            let name = itemNameLabels.first(where: { $0.tag == index})?.text ?? ""
-            //find correct item
-            guard let groceryItem = items.first(where: { $0.name == name}) else { continue }
-            //if current item currently exists in cart add to quantity
-            if let existingIndex = Cart.items.firstIndex(where: { $0.item.name == groceryItem.name }) {
-                Cart.items[existingIndex].quantity += quantity
-            //otherwise add item to cart
-            }else {
-                Cart.items.append(CartItem(item: groceryItem, quantity: quantity))
+        for (itemName, quantity) in currentSelections where quantity > 0 {
+            guard let item = itemsToShow.first(where: { $0.name == itemName }) else { continue }
+            
+            if let index = Cart.items.firstIndex(where: { $0.item.name == item.name }) {
+                Cart.items[index].quantity += quantity
+            } else {
+                Cart.items.append(CartItem(item: item, quantity: quantity))
             }
         }
-        //debug
+        
         print("Cart Items:")
         for item in Cart.items {
             print("\(item.item.name) - Qty: \(item.quantity)")
         }
-        //added to cart alert confirmation
+        
         let alert = UIAlertController(title: "Added to Cart!", message: "", preferredStyle: .alert)
         let okAction = UIAlertAction(title: "OK", style: .default) { (_) in
-            //reset quantities
-            for i in 0..<self.quantityTextFields.count {
-                self.quantityTextFields[i].text = "0"
-                self.steppers[i].value = 0
-            }
+            self.currentSelections.removeAll()
+            self.tableView.reloadData()
+            self.updateAddToCartButton()
         }
+        
         alert.addAction(okAction)
         present(alert, animated: true)
-        addToCart.isEnabled = false
     }
 }
-
